@@ -1,3 +1,14 @@
 .DS_Store
 *.swp
 *.swo
+
+# generated media artifacts
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.webp
+*.zip
+**/stills/
+**/clips/
+**/audio/

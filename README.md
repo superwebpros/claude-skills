@@ -12,6 +12,16 @@ Skills are reusable prompt templates that extend Claude Code with specialized ca
 |-------|-------------|---------|
 | [excalidraw](./excalidraw/) | Generate Excalidraw diagrams (architecture, flowcharts, concept maps, process flows) from text prompts | `/excalidraw` or ask Claude to create a diagram |
 
+## Plugins
+
+Beyond the standalone skills above, this repo is also a **plugin marketplace** (for multi-skill bundles that ship their own connectors).
+
+| Plugin | What it does | Install |
+|--------|-------------|---------|
+| [director-kit](./director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@director-kit` |
+
+See **[director-kit/README.md](./director-kit/README.md)** for the full pipeline, dual-mode generation (auto via the fal connector, or copy-paste prompts where there's no connector), and the build learnings.
+
 ## Installation
 
 ### Quick Install (all skills)

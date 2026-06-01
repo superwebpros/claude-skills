@@ -1,0 +1,7 @@
+{
+  "name": "director-kit",
+  "description": "Direct AI video the way a real director would. Turn a plain idea or a written story into a continuity-locked, character-consistent short — story adaptation, ad, reel, or trailer — generated via fal.ai. Pipeline: brief -> assets -> shotlist -> storyboard (scene-by-scene review) -> animate.",
+  "version": "0.2.0",
+  "author": { "name": "Jesse Flores / SuperWebPros" },
+  "license": "MIT"
+}
