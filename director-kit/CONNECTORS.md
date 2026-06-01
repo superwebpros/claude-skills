@@ -14,5 +14,11 @@ Director Kit can **auto-generate** images/video via the **fal.ai MCP connector**
 ### Setup (Claude Code)
 Get a key at the fal dashboard, then `export FAL_KEY=…` before launching. The connector passes it as a Bearer token.
 
+## Swipe File — research / grounding (optional)
+The **swipe-file MCP connector** (`.mcp.json` → `https://connectors.agentskillshop.com/swipe-file/mcp`) lets the kit ground creative in **proven, real-world examples** — a Qdrant DB of analyzed ads, scripts, sales letters, landing pages, and graphics. The `swipe-research` skill drives it (four tools: `search_swipe_content / strategy / visuals / sections`). Used by `director-brief` (proven hooks/angles) and `director-storyboard`/`director-assets` (visual references).
+
+- **No OAuth required**, so unlike fal it generally **works in claude.ai too**.
+- Optional: without it, the kit falls back to framework principles (and notes the work isn't swipe-grounded). See `skills/swipe-research/references/swipe-file-access.md`.
+
 ### Talking heads
 For a character delivering on-camera dialogue (e.g. an avatar answering questions), render in **HeyGen**; the kit handles everything around it (questioner cutaways, B-roll, assembly). Captions/title cards: **Submagic**.

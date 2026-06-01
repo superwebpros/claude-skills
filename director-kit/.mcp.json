@@ -6,6 +6,10 @@
       "headers": {
         "Authorization": "Bearer ${FAL_KEY}"
       }
+    },
+    "swipe-file": {
+      "type": "http",
+      "url": "https://connectors.agentskillshop.com/swipe-file/mcp"
     }
   }
 }

@@ -40,8 +40,11 @@ Same pipeline, two ways to make pixels (see [`CONNECTORS.md`](./CONNECTORS.md)):
 | `director-shotlist` | 3 | shot list + continuity ledger (uninflected, sized, camera-moved shots) |
 | `director-storyboard` | 4 | generate the storyboard stills, reviewed scene-by-scene; continuity critic |
 | `director-animate` | 5 | animate approved panels + assemble (+ VO / captions) |
+| `swipe-research` | cross-cut | ground briefs/shots/visuals in **proven examples** via the Swipe File connector (works in claude.ai too) |
 
 Each skill is self-contained (its own `references/`), so it also works as a standalone Claude skill.
+
+This plugin ships two connectors (see [`CONNECTORS.md`](./CONNECTORS.md)): **fal.ai** (generation; full power in Claude Code) and **swipe-file** (proven-example research; no OAuth, so it also works in claude.ai).
 
 ## What we learned building this
 Hard-won notes from real productions — *why* the kit is shaped the way it is:
