@@ -26,7 +26,7 @@ Same pipeline, two ways to make pixels (see [`CONNECTORS.md`](./CONNECTORS.md)):
 - **Claude Code / Cowork (full power):**
   ```bash
   claude plugin marketplace add superwebpros/claude-skills
-  claude plugin install director-kit@director-kit
+  claude plugin install director-kit@superwebpros
   export FAL_KEY=…     # enables auto-generation via the fal connector
   ```
 - **claude.ai:** add the marketplace; runs as the **planner** (prompts) until fal ships OAuth, then upgrades to full auto with no change.

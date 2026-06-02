@@ -1,5 +1,5 @@
 {
-  "name": "director-kit",
+  "name": "superwebpros",
   "owner": {
     "name": "Jesse Flores / SuperWebPros"
   },
@@ -8,7 +8,7 @@
       "name": "director-kit",
       "displayName": "Director Kit",
       "source": "./director-kit",
-      "description": "Direct AI video like a real director — turn a plain idea or a written story into a continuity-locked, character-consistent short (story, ad, reel, or trailer). Pipeline: brief -> assets -> shot list + continuity ledger -> storyboard -> animate. Auto-generates via the fal connector where available (Claude Code); otherwise produces ready-to-paste prompts."
+      "description": "Direct AI video like a real director \u2014 turn a plain idea or a written story into a continuity-locked, character-consistent short (story, ad, reel, or trailer). Pipeline: brief -> assets -> shot list + continuity ledger -> storyboard -> animate. Auto-generates via the fal connector where available (Claude Code); otherwise produces ready-to-paste prompts."
     }
   ]
 }

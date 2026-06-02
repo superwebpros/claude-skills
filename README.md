@@ -18,7 +18,7 @@ Beyond the standalone skills above, this repo is also a **plugin marketplace** (
 
 | Plugin | What it does | Install |
 |--------|-------------|---------|
-| [director-kit](./director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@director-kit` |
+| [director-kit](./director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@superwebpros` |
 
 See **[director-kit/README.md](./director-kit/README.md)** for the full pipeline, dual-mode generation (auto via the fal connector, or copy-paste prompts where there's no connector), and the build learnings.
 
