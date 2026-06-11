@@ -55,37 +55,40 @@ Rules for the mapping:
 
 Write the props to `creatives/<slug>/clips/reel.props.json`.
 
-## Render
+## Render — use the portable runner (default, works on any machine)
 
-Run the render **from the `~/agents/compound-remotion` project** — it has the Remotion deps
-(including the platform-native render binaries) installed. A standalone `npx @remotion/cli …`
-is **not** reliable: it fails to resolve the native `@remotion/renderer` binaries. The site is
-already deployed, so this only uses the local install for the CLI, not for the composition.
+The render runs in the **cloud**, so you don't need the composition source. Use the bundled
+**render-runner** (`./render-runner/`, see its README). It talks to the deployed Lambda via
+`@remotion/lambda/client` only — no composition project, no native render binaries.
 
-Write the props to an **absolute** path first (e.g. `/abs/creatives/<slug>/clips/reel.props.json`),
-then:
+One-time per machine:
 
 ```bash
-cd ~/agents/compound-remotion
-# creds: AWS_PROFILE=remotion (Jesse), or REMOTION_AWS_ACCESS_KEY_ID/SECRET in env
-AWS_PROFILE=remotion AWS_REGION=us-east-1 \
-npx remotion lambda render \
-  "https://remotionlambda-useast1-4kqe8hy4n8.s3.us-east-1.amazonaws.com/sites/compound-video/index.html" \
-  Reel \
-  --props="/abs/creatives/<slug>/clips/reel.props.json"
+cd ${CLAUDE_PLUGIN_ROOT}/skills/director-animate/render-runner && npm install
 ```
 
-(The project's `@remotion/cli` is pinned to the deployed function's version, so no version
-flag is needed.) Prints an S3 URL to the finished MP4. Optionally pull it local:
+Then, after writing the props to a file:
 
 ```bash
-aws s3 cp "s3://remotionlambda-useast1-4kqe8hy4n8/renders/<id>/out.mp4" /abs/creatives/<slug>/clips/final.mp4 --profile remotion
+cd ${CLAUDE_PLUGIN_ROOT}/skills/director-animate/render-runner
+# creds: AWS_PROFILE=remotion, or REMOTION_AWS_ACCESS_KEY_ID/SECRET in env (.env)
+AWS_PROFILE=remotion node render.mjs /abs/creatives/<slug>/clips/reel.props.json /abs/creatives/<slug>/clips/final.mp4
 ```
 
-**Teammate portability:** running this requires the `compound-remotion` project on the machine.
-For teammates who only have the plugin (not the project), the render step is run centrally for
-now (on Jesse's machine / infra). A self-contained render-runner (its own `package.json` +
-`npm install`, or a tiny hosted render endpoint) is the future unlock — see roadmap.
+It prints the S3 MP4 URL (and downloads `final.mp4` if the second arg + `aws` CLI are present).
+The deployed function is auto-discovered, so a function redeploy needs no change here as long
+as the runner's `@remotion/lambda` version matches the deployed function version.
+
+> `${CLAUDE_PLUGIN_ROOT}` is the installed director-kit plugin path. If `npm install` into the
+> plugin dir is awkward (e.g. a read-only install), copy `render-runner/` into the working
+> project once and run it there.
+
+### Dev alternative (the composition author's machine)
+
+From the `~/agents/compound-remotion` project (which has the full Remotion install), you can
+also render directly: `AWS_PROFILE=remotion npx remotion lambda render "<serve-url>" Reel --props=<abs path>`.
+A standalone `npx @remotion/cli …` is NOT reliable (it can't resolve the native renderer
+binaries) — use the runner or the project, not ad-hoc npx.
 
 Cost is ~$0.002 for a ~10s reel; scales linearly with length/resolution.
 

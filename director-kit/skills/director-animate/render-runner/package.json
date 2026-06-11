@@ -1,0 +1,10 @@
+{
+  "name": "compound-render-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable runner that renders the deployed Remotion 'Reel' composition on Lambda. No composition source or native render binaries needed — rendering happens in the cloud.",
+  "dependencies": {
+    "@remotion/lambda": "4.0.475"
+  }
+}

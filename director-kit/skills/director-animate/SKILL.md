@@ -30,9 +30,11 @@ title/CTA cards, animated word-by-word captions, crossfades, and an **editable**
    the shot's line). Lead with a `title` hook and end with a `title` CTA when the brief calls for it.
 2. Pull `brand` tokens (bg/text/accent) from the active brand's `00-brand/brand-guide.md`. The one
    deployed site renders any brand — brand is passed as props, never redeployed.
-3. Write `creatives/<slug>/clips/reel.props.json`, then render (pin `remotion@4.0.475` to the
-   deployed function; creds via `AWS_PROFILE=remotion` or `REMOTION_AWS_*` in `.env`). Returns an
-   S3 MP4 URL; optionally `aws s3 cp` it to `creatives/<slug>/clips/final.mp4`.
+3. Write `creatives/<slug>/clips/reel.props.json`, then render with the bundled **render-runner**
+   (`render-runner/render.mjs` — one-time `npm install`, then `node render.mjs <props.json> <out.mp4>`).
+   It calls the deployed Lambda via `@remotion/lambda/client`, so it works on any machine (no
+   composition project needed). Creds via `AWS_PROFILE=remotion` or `REMOTION_AWS_*` in `.env`.
+   Returns the S3 MP4 URL and downloads `final.mp4`. Full steps: `references/remotion-render.md`.
 
 **Fallback (raw cut only):** if Lambda creds aren't available, stitch clips with `ffmpeg` (normalize
 to 1080×1920, concat, re-encode) for an unbranded, uncaptioned cut. No `drawtext` captions — captions
