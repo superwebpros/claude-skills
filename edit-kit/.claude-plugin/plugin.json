@@ -1,0 +1,7 @@
+{
+  "name": "edit-kit",
+  "description": "Post-production for talking-head video: take raw footage through non-destructive cleanup steps to a reviewable cut. Step 1 is edit-deflub — remove flubbed takes marked with a clap, keep every deliberate pause, render on Lambda, and transcribe the result.",
+  "version": "0.1.0",
+  "author": { "name": "Jesse Flores / SuperWebPros" },
+  "license": "MIT"
+}
