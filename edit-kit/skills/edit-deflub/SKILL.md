@@ -37,6 +37,11 @@ python3 deflub.py <piece-folder> --probe
 # 2. LOOK at the frames it wrote, then run with the confirmed orientation
 python3 deflub.py <piece-folder> --transpose=transpose=2
 python3 deflub.py <piece-folder> --no-transpose
+
+# Mixed folders: orientation is settled PER CLIP, and the per-stem value wins.
+# One flag for a folder holding both an iPhone .MOV and a DSLR .MP4 renders
+# half the run sideways.
+python3 deflub.py <piece-folder> --no-transpose --transpose P1030368=transpose=2
 ```
 
 ## Orientation is a hard gate — look at a frame
@@ -51,7 +56,9 @@ single shoot on 2026-09-04:
   needs `transpose=2`. Nothing in the container reveals this.
 
 Generalising from the first produced three sideways renders that had to be redone. The
-tool refuses to run until you pass `--transpose` or `--no-transpose`.
+tool refuses to run until every clip in the run has an orientation — and it names the
+clips it has none for. `--transpose STEM=transpose=2` (repeatable, `STEM=none` for "no
+rotation") scopes the decision to one master and beats the global flag.
 
 ## What it does
 
