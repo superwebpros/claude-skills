@@ -1,65 +1,101 @@
 ---
 name: edit-deflub
-description: Remove flubbed takes marked with a clap from raw talking-head footage. Keeps every deliberate pause, renders the clean cut on Lambda, and transcribes the result. Use whenever a speaker has raw footage with marked retakes.
+description: Remove flubbed takes from already-filed raw footage, keeping every deliberate pause, then render the cut on Lambda and transcribe it. Flubs are marked at capture time by a clap. Trigger when the user wants to de-flub, clean up raw takes, remove bad takes or false starts, or run step 1 of the video edit pipeline.
 ---
 
-# Edit Deflub
+# edit-deflub
 
-**raw footage with clap-marked flubs → clean cut + transcript.** Remove flubbed takes while preserving intentional pauses and timing. Renders on AWS Lambda via Remotion and transcribes the result.
+Turn already-filed raw footage into a review cut with the flubbed takes removed and
+**every deliberate pause intact**, plus a transcript of the result.
 
-## Prerequisites
+This is transformation step 1. It does not tighten pauses, add captions, zoom, crop, or
+cut the ad — those are later steps.
 
-The private `superwebpros/compound-remotion` repo must be cloned and set up (see the `README.md` in edit-kit for the exact commands). You also need AWS credentials with a deployed Remotion Lambda function and an S3 bucket for renders.
+Design: `aiprocesspros/docs/superpowers/specs/2026-09-04-video-deflub-design.md`.
+
+## Precondition
+
+Footage is already filed at `<piece>/footage/`. Ingest and filing are a live judgment
+call about campaign membership and are done conversationally, not by this skill.
 
 ## The capture contract
 
-This skill assumes one behavior at capture time:
-
 > **Clap, then restart the line from its first word.**
 
-The clap marks the flub. Deflub detects it from the waveform and removes that segment. No words are transcribed; the clap cannot collide with the script.
+Everything from the start of the botched attempt through the clap is removed; the retry
+that follows is the keeper. If a clip contains no claps this skill reports that and
+stops — it does not guess.
 
-## Workflow
+## Run it
 
-### 1. Check the prerequisites
-- Is `~/services/compound-remotion` checked out and `npm install` + `pip install -r deflub/requirements.txt` complete?
-- Do you have AWS credentials in the environment, and does the Lambda function exist?
-
-If either is missing, fail fast with a clear message.
-
-### 2. Locate the raw footage
-Get the path to the master video file (typically `.mov` from Premiere/Final Cut). Confirm it's the right take.
-
-### 3. Run deflub
 ```bash
 cd ~/services/compound-remotion/deflub
-python3 deflub.py <path-to-master-mov> [--probe] [<clip1> <clip2> ...]
+
+# 1. ALWAYS probe first. Orientation cannot be inferred.
+python3 deflub.py <piece-folder> --probe
+
+# 2. LOOK at the frames it wrote, then run with the confirmed orientation
+python3 deflub.py <piece-folder> --transpose=transpose=2
+python3 deflub.py <piece-folder> --no-transpose
 ```
 
-The script:
-- Extracts and analyzes audio to find claps (the flub marker)
-- Finds speech islands (regions where speech occurs)
-- Warns if any clap is outside a speech island (bias to under-cut)
-- Builds a cut list removing each flubbed segment
-- Renders the clean cut on Lambda
-- Transcribes the result
-- Writes output to `renders/<slug>/` (video + `.vtt` transcript)
+## Orientation is a hard gate — look at a frame
 
-### 4. Review the output
-- Watch the rendered cut
-- Check the transcript for accuracy (speech is rarely 100% accurate from ASR)
-- If retraining the transcription model is needed, that's a separate step
+**Never infer orientation from metadata or pixel dimensions.** Both traps appeared in a
+single shoot on 2026-09-04:
 
-### 5. Use the result
-The clean cut and transcript are ready for downstream work (filing, editing, publishing).
+- iPhone `.MOV` — 3840×2160 carrying a −90 display matrix that ffmpeg applies itself.
+  Decodes portrait. Needs no filter.
+- DSLR `.MP4` — 1920×1080 shot on a physically rotated camera that wrote **no rotation
+  metadata at all**: no side data, no `rotate` tag, DAR reports 16:9. Decodes sideways,
+  needs `transpose=2`. Nothing in the container reveals this.
 
-## Bias to under-cut
+Generalising from the first produced three sideways renders that had to be redone. The
+tool refuses to run until you pass `--transpose` or `--no-transpose`.
 
-When a clap boundary is uncertain or a clap is outside a speech island, deflub errs toward leaving a fragment rather than reaching further back. This preserves audio quality and avoids cutting mid-word. Review the warning list if any claps were skipped.
+## What it does
 
-## Constraints (from the design)
+1. **Orientation** — probe, extract a frame, wait for your confirmation.
+2. **Proxy + stage** — rotate, scale to 1080×1920, native frame rate, hardware encode,
+   upload to S3, hand the render a presigned URL.
+3. **Detect** — clap transients on the high-passed waveform; speech islands from a
+   loudnorm-adaptive gate. No ASR.
+4. **Cut list** — each cut runs from the start of the speech run before the clap through
+   the clap. Guards reject any edge landing inside speech, any overlap, any cut past the
+   end.
+5. **Render** — Lambda, `SpeechEdit` composition. The ripple happens in the composition,
+   so a cut change is a props change.
+6. **Transcribe** — ASR the *rendered* file, write the transcript and an `edits.md` stub
+   beside the video.
 
-- **ffmpeg is Remotion's bundled binary**, not Homebrew's — the script uses the binary at `~/services/compound-remotion/node_modules/@remotion/compositor-darwin-arm64/ffmpeg` with `DYLD_LIBRARY_PATH` set correctly.
-- **All timestamps are original footage seconds.** Conversion to rendered time happens exactly once in code.
-- **Renders always happen on Lambda.** No local renders.
-- **Orientation is decided by looking at an extracted frame**, never inferred from metadata.
+## Output
+
+```
+<piece>/footage/_selects/<stem>/
+├── <stem>_deflubbed-v1.mp4
+├── <stem>_transcript.md
+└── edits.md
+```
+
+## Things that will bite you
+
+- **ffmpeg** is Remotion's bundled binary, not Homebrew's. Homebrew's has been broken
+  since the x265 4.3 upgrade (2026-08-30). It needs `DYLD_LIBRARY_PATH` set to its own
+  directory; `deflub/ffmpeg.py` handles this.
+- **Never parse Remotion's console output to find a render.** It prints an
+  `https://s3...` url, not `s3://`. List the bucket by prefix and take the newest key —
+  a wrapper that grepped for `s3://` aborted three runs, each after a paid render.
+- **All timestamps are original footage seconds.** The rendered timebase is derived, never
+  hand-converted.
+- **Bias to under-cut.** An uncertain boundary leaves a fragment rather than reaching
+  further back. Fragments show up in the transcript and are recoverable; deleted good
+  takes are not.
+- **Clap thresholds are measured, not proven at scale.** A clap more than ~12 dB down, or
+  one landing on speech instead of in a pause, may be missed. Every run logs detected
+  features to `_build/claps-<stem>.json` so a miss comes with the data to retune.
+
+## Verify
+
+The transcript is the check. It is produced from the rendered file by a pass that knows
+nothing about what was supposed to be removed, so a surviving flub or an eaten line shows
+up plainly. Skim it before moving to the next pipeline step.
