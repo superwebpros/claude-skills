@@ -11,6 +11,7 @@ Skills are reusable prompt templates that extend Claude Code with specialized ca
 | Skill | Description | Trigger |
 |-------|-------------|---------|
 | [excalidraw](./excalidraw/) | Generate Excalidraw diagrams (architecture, flowcharts, concept maps, process flows) from text prompts | `/excalidraw` or ask Claude to create a diagram |
+| [okf](./okf/) | Configure, audit, and adapt folders to Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2): scaffold bundles, lint conformance + trust/freshness, convert existing docs via a reviewable plan, generate `index.md`/`log.md` | `/okf` or ask Claude to audit/convert a folder to OKF |
 
 ## Plugins
 
