@@ -20,6 +20,7 @@ Beyond the standalone skills above, this repo is also a **plugin marketplace** (
 | Plugin | What it does | Install |
 |--------|-------------|---------|
 | [director-kit](./director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@superwebpros` |
+| [incident-response](./incident-response/) | Run a fleet-wide security/ops incident with AI agents safely: read-only audit → beads epic with verify + cleanup built in → delegation contracts → canary change ritual → human gates → independent verifier → tracked teardown. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install incident-response@superwebpros` |
 
 See **[director-kit/README.md](./director-kit/README.md)** for the full pipeline, dual-mode generation (auto via the fal connector, or copy-paste prompts where there's no connector), and the build learnings.
 
