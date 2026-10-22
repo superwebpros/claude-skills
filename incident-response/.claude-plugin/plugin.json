@@ -1,0 +1,7 @@
+{
+  "name": "incident-response",
+  "description": "Run a fleet-wide security or ops incident with AI agents safely: read-only blast-radius audit, beads epic with built-in verify + cleanup beads, delegation contracts, a reversible change ritual (backup, rollback tag, canary, soak), human approval gates, an independent verifier, and tracked teardown.",
+  "version": "0.1.0",
+  "author": { "name": "Jesse Flores / SuperWebPros" },
+  "license": "MIT"
+}
