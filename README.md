@@ -10,8 +10,8 @@ Skills are reusable prompt templates that extend Claude Code with specialized ca
 
 | Skill | Description | Trigger |
 |-------|-------------|---------|
-| [excalidraw](./excalidraw/) | Generate Excalidraw diagrams (architecture, flowcharts, concept maps, process flows) from text prompts | `/excalidraw` or ask Claude to create a diagram |
-| [okf](./okf/) | Configure, audit, and adapt folders to Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2): scaffold bundles, lint conformance + trust/freshness, convert existing docs via a reviewable plan, generate `index.md`/`log.md` | `/okf` or ask Claude to audit/convert a folder to OKF |
+| [excalidraw](./skills/excalidraw/) | Generate Excalidraw diagrams (architecture, flowcharts, concept maps, process flows) from text prompts | `/excalidraw` or ask Claude to create a diagram |
+| [okf](./skills/okf/) | Configure, audit, and adapt folders to Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2): scaffold bundles, lint conformance + trust/freshness, convert existing docs via a reviewable plan, generate `index.md`/`log.md` | `/okf` or ask Claude to audit/convert a folder to OKF |
 
 ## Plugins
 
@@ -19,11 +19,11 @@ Beyond the standalone skills above, this repo is also a **plugin marketplace** (
 
 | Plugin | What it does | Install |
 |--------|-------------|---------|
-| [director-kit](./director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@superwebpros` |
-| [incident-response](./incident-response/) | Run a fleet-wide security/ops incident with AI agents safely: read-only audit → beads epic with verify + cleanup built in → delegation contracts → canary change ritual → human gates → independent verifier → tracked teardown. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install incident-response@superwebpros` |
-| [edit-kit](./edit-kit/) | Post-production for talking-head video — remove flubbed takes marked with a clap, keep deliberate pauses, render on Lambda, transcribe the result. Requires the private `superwebpros/compound-remotion` repo. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install edit-kit@superwebpros` |
+| [director-kit](./plugins/director-kit/) | Direct AI video like a director — turn an idea or a written story into a continuity-locked short (story / ad / reel / trailer). A 5-stage pipeline (brief → assets → shot list → storyboard → animate) with an optional fal.ai generation connector. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install director-kit@superwebpros` |
+| [incident-response](./plugins/incident-response/) | Run a fleet-wide security/ops incident with AI agents safely: read-only audit → beads epic with verify + cleanup built in → delegation contracts → canary change ritual → human gates → independent verifier → tracked teardown. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install incident-response@superwebpros` |
+| [edit-kit](./plugins/edit-kit/) | Post-production for talking-head video — remove flubbed takes marked with a clap, keep deliberate pauses, render on Lambda, transcribe the result. Requires the private `superwebpros/compound-remotion` repo. | `claude plugin marketplace add superwebpros/claude-skills` then `claude plugin install edit-kit@superwebpros` |
 
-See **[director-kit/README.md](./director-kit/README.md)** and **[edit-kit/README.md](./edit-kit/README.md)** for full details, prerequisites, and design learnings.
+See **[director-kit/README.md](./plugins/director-kit/README.md)** and **[edit-kit/README.md](./plugins/edit-kit/README.md)** for full details, prerequisites, and design learnings.
 
 ## Installation
 
