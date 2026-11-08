@@ -188,6 +188,85 @@ Group labels are standalone text (no containerId) positioned at top-left of grou
 }
 ```
 
+## Carousel / Multi-Slide Diagrams
+
+When generating a carousel or any diagram with multiple distinct slides (social media, presentations, course content), use Excalidraw's native **`frame`** element. This is what the `excalidraw-export` tool uses for named per-frame SVG/PNG output.
+
+### Frame Element Schema
+
+```json
+{
+  "id": "frame-what-are-channels",
+  "type": "frame",
+  "name": "what-are-channels",
+  "x": 0,
+  "y": 0,
+  "width": 1080,
+  "height": 1080,
+  "angle": 0,
+  "strokeColor": "#bbb",
+  "backgroundColor": "transparent",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "groupIds": [],
+  "frameId": null,
+  "roundness": null,
+  "seed": 1,
+  "version": 1,
+  "versionNonce": 1,
+  "isDeleted": false,
+  "boundElements": null,
+  "updated": 1,
+  "link": null,
+  "locked": false
+}
+```
+
+### Frame Naming Convention
+
+- **Always kebab-case** describing the slide content: `"what-are-channels"`, `"the-mechanics"`, `"use-cases"`
+- **Never generic names**: `f1`, `frame1`, `slide1`, `f1-bg` — these become meaningless filenames on export
+- The `name` becomes the filename suffix: `diagram__what-are-channels.svg`
+
+### Child Elements Inside Frames
+
+Every element belonging to a frame MUST set `"frameId"` to the parent frame's `id` (instead of `null`):
+
+```json
+{
+  "id": "slide1-title-text",
+  "type": "text",
+  "frameId": "frame-what-are-channels",
+  ...
+}
+```
+
+### Carousel Layout (Standard)
+
+Square social media format — 1080×1080 per frame, 80px gap between frames:
+
+| Frame | y position |
+|-------|-----------|
+| 1st | 0 |
+| 2nd | 1160 |
+| 3rd | 2320 |
+| 4th | 3480 |
+| Nth | (N-1) × 1160 |
+
+All elements inside a frame use coordinates relative to 0,0 of the canvas — the `frameId` property is what visually clips them to the frame in the Excalidraw app.
+
+### Exporting Frames
+
+After generating the `.excalidraw` file, export per-frame PNGs (e.g. for Pencil import) with the `excalidraw-export` tool, if installed:
+```bash
+node <path-to>/excalidraw-export/export.mjs <file>.excalidraw --frames --png --out ./slides/
+```
+
+---
+
 ## Nested Groups
 
 For diagrams like AWS architecture with nested boundaries:

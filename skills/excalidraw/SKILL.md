@@ -1,7 +1,7 @@
 ---
 name: excalidraw
-description: Generate Excalidraw diagrams (architecture, flowcharts, concept maps, process flows) from detailed text prompts. Use when the user wants to create or update .excalidraw diagram files.
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(npx:*), Bash(node:*)
+description: Generate Excalidraw diagrams (architecture diagrams, flowcharts, concept maps, process flows, multi-slide carousels) as .excalidraw JSON files from detailed text prompts. Use when the user wants to create, update, or fix a .excalidraw diagram file, or asks for a diagram, flowchart, or carousel to be drawn in Excalidraw.
+allowed-tools: Read Write Edit Glob Grep Bash(npx:*) Bash(node:*)
 ---
 
 # Excalidraw Diagram Generator
@@ -24,6 +24,7 @@ Use when the user asks to:
 | Flowchart | Top-to-bottom or left-to-right | Decision trees, algorithms, user journeys |
 | Concept Map | Hub-and-spoke or clustered | Teaching concepts, brainstorming, relationships |
 | Process Flow | Horizontal pipeline or swimlanes | Workflows, CI/CD, data pipelines |
+| Carousel | Vertically stacked 1080×1080 frames | Social media, presentations, course content |
 
 ## Workflow
 
@@ -78,6 +79,8 @@ For EVERY component, create elements following these rules:
 4. **Arrow edge calculations**: Arrows must originate from shape edges using the formulas in `references/arrows.md`
 
 5. **Unique IDs**: Every element must have a unique string ID. Use descriptive kebab-case: `api-server`, `api-server-text`, `arrow-api-to-db`
+
+6. **Carousels use native frame elements**: For any multi-slide diagram, create a `frame` element (type: "frame") for each slide with a semantic kebab-case `name` (e.g., `"what-are-channels"`, NOT `"f1"` or `"slide1"`). All child elements must set `"frameId"` to their parent frame's `id`. See `references/json-format.md` → "Carousel / Multi-Slide Diagrams".
 
 #### Element Generation Order
 
@@ -147,11 +150,11 @@ Consult these for detailed specs. Read them when generating diagrams:
 
 | File | When to Read |
 |------|-------------|
-| `~/.claude/skills/excalidraw/references/json-format.md` | Always — element structure, required properties, text binding |
-| `~/.claude/skills/excalidraw/references/arrows.md` | Always — arrow routing, edge calculations, bindings |
-| `~/.claude/skills/excalidraw/references/colors.md` | When choosing colors — palettes by platform/type |
-| `~/.claude/skills/excalidraw/references/examples.md` | For layout patterns and complete JSON examples |
-| `~/.claude/skills/excalidraw/references/validation.md` | Before writing — validation checklist and common bugs |
+| `references/json-format.md` | Always — element structure, required properties, text binding |
+| `references/arrows.md` | Always — arrow routing, edge calculations, bindings |
+| `references/colors.md` | When choosing colors — palettes by platform/type |
+| `references/examples.md` | For layout patterns and complete JSON examples |
+| `references/validation.md` | Before writing — validation checklist and common bugs |
 
 ## Prompt Examples
 
