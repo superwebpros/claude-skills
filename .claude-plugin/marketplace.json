@@ -22,6 +22,12 @@
       "displayName": "Edit Kit",
       "source": "./plugins/edit-kit",
       "description": "Post-production for talking-head video. Non-destructive cleanup steps from raw footage to a reviewable cut. Requires the private superwebpros/compound-remotion repo for the Remotion/Lambda render."
+    },
+    {
+      "name": "msu-course",
+      "displayName": "MSU Course",
+      "source": "./plugins/msu-course",
+      "description": "Run MSU SSC 490-005 (AI Workflows & Organizational Intelligence) like a client project: plan sessions and milestone sprints as outcome/steering plans with a calendar sync pass, capture post-class retrospectives that push concrete edits into downstream plans, and write student-facing session docs, milestone docs, step examples and team templates."
     }
   ]
 }
