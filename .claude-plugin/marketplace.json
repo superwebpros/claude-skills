@@ -1,5 +1,6 @@
 {
   "name": "superwebpros",
+  "description": "SuperWebPros team skills and plugins for Claude Code and other Agent Skills-compatible tools.",
   "owner": {
     "name": "Jesse Flores / SuperWebPros"
   },
@@ -7,14 +8,26 @@
     {
       "name": "director-kit",
       "displayName": "Director Kit",
-      "source": "./director-kit",
-      "description": "Direct AI video like a real director \u2014 turn a plain idea or a written story into a continuity-locked, character-consistent short (story, ad, reel, or trailer). Pipeline: brief -> assets -> shot list + continuity ledger -> storyboard -> animate. Auto-generates via the fal connector where available (Claude Code); otherwise produces ready-to-paste prompts."
+      "source": "./plugins/director-kit",
+      "description": "Direct AI video like a real director — turn a plain idea or a written story into a continuity-locked, character-consistent short (story, ad, reel, or trailer). Pipeline: brief -> assets -> shot list + continuity ledger -> storyboard -> animate. Auto-generates via the fal connector where available (Claude Code); otherwise produces ready-to-paste prompts."
     },
     {
       "name": "incident-response",
       "displayName": "Incident Response",
-      "source": "./incident-response",
+      "source": "./plugins/incident-response",
       "description": "Run a fleet-wide security or ops incident with AI agents safely: read-only blast-radius audit, beads epic with built-in verify + cleanup, delegation contracts, reversible change ritual (backup, rollback tag, canary, soak), human approval gates, an independent verifier, and tracked teardown."
+    },
+    {
+      "name": "edit-kit",
+      "displayName": "Edit Kit",
+      "source": "./plugins/edit-kit",
+      "description": "Post-production for talking-head video. Non-destructive cleanup steps from raw footage to a reviewable cut. Requires the private superwebpros/compound-remotion repo for the Remotion/Lambda render."
+    },
+    {
+      "name": "msu-course",
+      "displayName": "MSU Course",
+      "source": "./plugins/msu-course",
+      "description": "Run MSU SSC 490-005 (AI Workflows & Organizational Intelligence) like a client project: plan sessions and milestone sprints as outcome/steering plans with a calendar sync pass, capture post-class retrospectives that push concrete edits into downstream plans, and write student-facing session docs, milestone docs, step examples and team templates."
     }
   ]
 }

@@ -1,0 +1,6 @@
+{
+  "name": "msu-course",
+  "description": "Run MSU SSC 490-005 (AI Workflows & Organizational Intelligence) like a client project: plan sessions and milestone sprints as outcome/steering plans with a sync pass, capture post-class retrospectives that push edits into downstream plans, and write student-facing session docs, milestone docs, step examples and templates.",
+  "version": "1.0.0",
+  "author": { "name": "SuperWebPros" }
+}

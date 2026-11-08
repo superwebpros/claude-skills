@@ -62,6 +62,7 @@ FUNCTION validateDiagram(elements):
 - [ ] Selected color palette
 - [ ] Planned grid positions
 - [ ] Created ID naming scheme
+- [ ] **Carousel only**: Planned semantic `name` for each frame (kebab-case content descriptor, not `f1`/`slide1`)
 
 ### During Generation
 
@@ -73,6 +74,8 @@ FUNCTION validateDiagram(elements):
 - [ ] No diamond shapes used
 - [ ] Applied staggering formula for multiple arrows from same edge
 - [ ] Shapes connected by arrows list arrows in their `boundElements`
+- [ ] **Carousel only**: Every slide has a native `frame` element with semantic kebab-case `name`
+- [ ] **Carousel only**: Every child element inside a frame sets `"frameId"` to the parent frame's `id`
 
 ### Arrow Validation (Every Arrow)
 
