@@ -1,0 +1,82 @@
+name: Validate skills & plugins
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DISABLE_TELEMETRY: "1"
+  DO_NOT_TRACK: "1"
+  # Pinned commit of github.com/agentskills/agentskills (skills-ref reference validator).
+  SKILLS_REF_REF: 83021e2be457a9b6679148719c1f6074f0ad975e
+
+jobs:
+  claude-plugin-validate:
+    name: claude plugin validate --strict
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code CLI (no auth needed for validate)
+        run: npm install -g @anthropic-ai/claude-code && claude --version
+      - name: Validate marketplace manifest
+        run: claude plugin validate . --strict
+      - name: Validate each plugin
+        # Validating the marketplace does not recurse into plugins, so check each one.
+        run: |
+          set -euo pipefail
+          for p in plugins/*/; do
+            echo "::group::$p"
+            claude plugin validate "$p" --strict
+            echo "::endgroup::"
+          done
+
+  skills-spec:
+    name: Agent Skills spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Repo validator (stdlib; name/description/allowed-tools, 500-line warning)
+        run: python3 scripts/validate-skills.py .
+      - name: Install skills-ref (official reference validator)
+        run: pip install "git+https://github.com/agentskills/agentskills.git@${SKILLS_REF_REF}#subdirectory=skills-ref"
+      - name: skills-ref validate
+        run: |
+          set -uo pipefail
+          shopt -s nullglob
+          fail=0
+          for d in skills/*/ plugins/*/skills/*/; do
+            [ -f "$d/SKILL.md" ] || continue
+            if out=$(skills-ref validate "$d" 2>&1); then
+              echo "OK   $d"
+            else
+              echo "FAIL $d"; echo "$out" | sed 's/^/     /'
+              echo "::error file=${d}SKILL.md::$(echo "$out" | tr '\n' ' ')"
+              fail=1
+            fi
+          done
+          exit $fail
+
+  skills-cli-smoke:
+    name: npx skills add . --list
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: List installable skills
+        run: npx -y skills add . --list
