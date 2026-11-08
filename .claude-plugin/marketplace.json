@@ -15,6 +15,12 @@
       "displayName": "Incident Response",
       "source": "./incident-response",
       "description": "Run a fleet-wide security or ops incident with AI agents safely: read-only blast-radius audit, beads epic with built-in verify + cleanup, delegation contracts, reversible change ritual (backup, rollback tag, canary, soak), human approval gates, an independent verifier, and tracked teardown."
+    },
+    {
+      "name": "edit-kit",
+      "displayName": "Edit Kit",
+      "source": "./edit-kit",
+      "description": "Post-production for talking-head video. Non-destructive cleanup steps from raw footage to a reviewable cut. Requires the private superwebpros/compound-remotion repo for the Remotion/Lambda render."
     }
   ]
 }
