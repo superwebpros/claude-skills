@@ -48,6 +48,14 @@ https://github.com/superwebpros/claude-skills/tree/main/skills/<name>
 https://github.com/superwebpros/claude-skills/tree/main/plugins/<plugin>/skills/<name>
 ```
 
+## Team setup (SuperWebPros)
+
+- **Nothing to configure to install.** The repo is public, so `npx skills`, the plugin marketplace and importers like Mausbot work without GitHub auth. You only need `gh auth login` to push branches and open PRs.
+- **Per project, not global.** Install the skills a project needs into that project and commit `.claude/skills/` + `skills-lock.json`. Run `npx skills check` / `npx skills update` now and then to pick up improvements.
+- **Skills that need private config** read it from `~/.credentials/<name>.env` (see each skill's Prerequisites below). Ask Jesse for the values privately — never paste them into Slack, issues, or this repo.
+  - `beads-sync` → `~/.credentials/beads-remote.env` (`BEADS_REMOTE_HOST`, `BEADS_REMOTE_SSH_USER`, `BEADS_REMOTE_SSH_KEY`, `BEADS_REMOTE_PORT`)
+- **Improving a skill:** edit it here (not a copy inside a project), open a PR, and re-run `npx skills update` in your projects after it merges.
+
 ## Skills
 
 | Skill | What it does | Prerequisites |
