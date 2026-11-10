@@ -28,13 +28,15 @@ For every pick you might use:
 
 ### 2. Choose and order
 
-- Use **fewer stories, told fully**, rather than all of them. The pack sets how many and how long. A headline plus a clause is not a story; if the budget can't hold a real telling, cut a story.
+- The pack sets the **mode**: a **rundown** (several items, each a sharp specific, threaded; e.g. a Bloomberg Money Minute) or **full stories** (fewer items, each with background and tension). Either way, every item carries concrete specifics; an abstraction is a line you haven't finished reporting.
 - Order: the story with the clearest "so what" for the audience goes first (it's the hook). End on the most actionable one.
 - A runner-up may replace a pick that fails the fact check. Say which you swapped and why in your notes (never in the voiceover).
 
-### 3. Tell each story
+### 3. Write the items
 
-At full length (the pack's budget allows ~120+ words per story), each story has five beats:
+**Rundown mode** (the pack says so, or ~30–40 words per item): each item is a lede-grade fact with its numbers, names and attribution, plus at most one line of driver/context. **Thread** the items: hand off through a supported cause, a contrast, or a shared theme ("Meanwhile…", "The twist…"). Newsroom fragments are fine ("Oil today sharply lower, under $87 a barrel."). No commentary unless the pack allows a color beat.
+
+**Full-story mode** (~120+ words per story): each story has five beats:
 
 - **Lede**: the sharpest verified fact, attributed. "Only 37% of companies McKinsey surveyed say AI has moved their earnings."
 - **Background**: what a smart outsider needs to follow it: who, why now, what came before.
@@ -47,9 +49,9 @@ At short length, keep at least lede + why it matters, and attribute. Either way,
 
 ### 4. Shape it for the ear
 
-- **HOOK** = the **lede** (1–2 sentences): the day's most consequential fact, stated sharply and specifically, newsroom style. Prefer a declarative fact over a question. No greetings, no "welcome to", no show name first (the pack may put the show name in the CTA).
+- **HOOK** = the **lede** (1–2 sentences): the day's most consequential item, stated sharply and specifically, newsroom style, ideally with its driver. A declarative fact, not a question. Open exactly as the pack says (e.g. a cold open).
 - **BODY**: the stories, with spoken transitions ("Second…", "Meanwhile…", "And one more…").
-- **CTA** (1–2 sentences): exactly the pack's CTA pattern.
+- **CTA**: exactly the pack's closing line or pattern, nothing more.
 - Short sentences. One idea per sentence. Write numbers as they should be said when it matters ("forty-two percent" is fine as `42%`; the voice reads it; avoid symbols like `~`, `>`, `/`).
 - Read it aloud in your head at the pack's pace. Cut until it fits the word budget **with room to breathe**.
 
