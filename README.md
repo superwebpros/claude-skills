@@ -62,6 +62,7 @@ https://github.com/superwebpros/claude-skills/tree/main/plugins/<plugin>/skills/
 |---|---|---|
 | [ad-scriptwriter](./skills/ad-scriptwriter/) | Direct-response short-form video ad scripts (9:16) in the AI Process Pros voice | — |
 | [beads-sync](./skills/beads-sync/) | Diagnose and sync Beads (`bd`) with the team's shared Dolt remote | `BEADS_REMOTE_*` vars (team: `~/.credentials/beads-remote.env`) |
+| [news-minute](./skills/news-minute/) | Fact-checked, avatar-ready news-roundup video scripts (HOOK/BODY/CTA) from a brief of picks; voice and rules come from a show pack | A show pack (context); `heygen-render` to dry-run |
 | [excalidraw](./skills/excalidraw/) | Generate Excalidraw diagrams, flowcharts and carousels from text | — |
 | [heygen-compound](./skills/heygen-compound/) | HeyGen avatar renders and reel voiceovers via `heygen-render` | Private `superwebpros/heygen-production` checkout, `HEYGEN_PRODUCTION_DIR` |
 | [okf](./skills/okf/) | Configure, audit and convert folders to Google's Open Knowledge Format | — |
