@@ -28,14 +28,21 @@ For every pick you might use:
 
 ### 2. Choose and order
 
-- Use **fewer stories, said well**, rather than all of them. The pack sets the maximum; one to three is typical for under a minute.
+- Use **fewer stories, told fully**, rather than all of them. The pack sets how many and how long. A headline plus a clause is not a story; if the budget can't hold a real telling, cut a story.
 - Order: the story with the clearest "so what" for the audience goes first (it's the hook). End on the most actionable one.
 - A runner-up may replace a pick that fails the fact check. Say which you swapped and why in your notes (never in the voiceover).
 
-### 3. Write each story as: what happened → why it matters to the audience
+### 3. Tell each story
 
-- **What happened**: one or two plain sentences. Attribute: "Gartner surveyed CMOs and found…".
-- **Why it matters**: one or two sentences in the audience's terms (the pack's `audience.md`): what they should notice, decide, or do. This is the show's value; a headline alone is not a segment.
+At full length (the pack's budget allows ~120+ words per story), each story has five beats:
+
+- **Lede**: the sharpest verified fact, attributed. "Only 37% of companies McKinsey surveyed say AI has moved their earnings."
+- **Background**: what a smart outsider needs to follow it: who, why now, what came before.
+- **Tension**: the surprising number, the contrast, who disagrees, what's still uncertain.
+- **Why it matters**: in the audience's terms (`audience.md`): what they should notice, decide or do. This is the show's value.
+- **What to watch**: the next date, decision or signal, only if a source says so.
+
+At short length, keep at least lede + why it matters, and attribute. Either way, a list of headlines is not a segment.
 - No hype words, no breathless framing, no prediction stated as fact. If the pack has a framework to apply (e.g. a method name), apply it here, lightly, at most once per script.
 
 ### 4. Shape it for the ear
@@ -52,7 +59,7 @@ The output must render without edits. Follow `heygen-production/docs/script-form
 
 ```markdown
 ---
-format: reel
+format: <the pack's script_format, e.g. reel or lesson>
 show: <show slug>
 date: <YYYY-MM-DD>
 writer: <model or person>
