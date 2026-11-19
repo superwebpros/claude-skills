@@ -62,9 +62,11 @@ https://github.com/superwebpros/claude-skills/tree/main/plugins/<plugin>/skills/
 |---|---|---|
 | [ad-scriptwriter](./skills/ad-scriptwriter/) | Direct-response short-form video ad scripts (9:16) in the AI Process Pros voice | — |
 | [beads-sync](./skills/beads-sync/) | Diagnose and sync Beads (`bd`) with the team's shared Dolt remote | `BEADS_REMOTE_*` vars (team: `~/.credentials/beads-remote.env`) |
+| [paid-media-strategy](./skills/paid-media-strategy/) | Platform-neutral judgment for paid campaigns: tests with read points, sample sense, like-for-like comparisons, creative read order | — |
 | [news-minute](./skills/news-minute/) | Fact-checked, avatar-ready news-roundup video scripts (HOOK/BODY/CTA) from a brief of picks; voice and rules come from a show pack | A show pack (context); `heygen-render` to dry-run |
 | [excalidraw](./skills/excalidraw/) | Generate Excalidraw diagrams, flowcharts and carousels from text | — |
 | [heygen-compound](./skills/heygen-compound/) | HeyGen avatar renders and reel voiceovers via `heygen-render` | Private `superwebpros/heygen-production` checkout, `HEYGEN_PRODUCTION_DIR` |
+| [meta-ads-ops](./skills/meta-ads-ops/) | Meta Graph API mechanics: insights by ad/placement/video, clone placement-customised creatives, edit placements, the quirks that bite | Graph access: `META_TOKEN` or a relay via `META_GRAPH_BASE` |
 | [okf](./skills/okf/) | Configure, audit and convert folders to Google's Open Knowledge Format | — |
 
 ## Plugins

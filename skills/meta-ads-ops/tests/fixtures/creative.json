@@ -1,0 +1,18 @@
+{"id": "900", "name": "CR | 03 | placements 9x16+4x5",
+ "url_tags": "utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign=c-01&utm_content=03-four-stages&utm_term=t",
+ "object_story_spec": {"page_id": "<PAGE_ID>", "instagram_user_id": "<IG_ID>"},
+ "degrees_of_freedom_spec": {"creative_features_spec": {"adapt_to_placement": {"enroll_status": "OPT_OUT"}}},
+ "asset_feed_spec": {
+  "optimization_type": "PLACEMENT", "call_to_action_types": ["LEARN_MORE"], "ad_formats": ["SINGLE_VIDEO"],
+  "bodies": [{"text": "Body"}], "titles": [{"text": "Title"}], "link_urls": [{"website_url": "https://example.com/lp"}],
+  "videos": [
+   {"video_id": "v-old-916", "thumbnail_url": "https://old/916.jpg", "adlabels": [{"name": "03-four-stages-9x16", "id": "L1"}]},
+   {"video_id": "v-old-45", "thumbnail_url": "https://old/45.jpg", "adlabels": [{"name": "03-four-stages-4x5", "id": "L2"}]}],
+  "asset_customization_rules": [
+   {"priority": 1, "video_label": {"name": "03-four-stages-9x16", "id": "L1"},
+    "customization_spec": {"age_min": 13, "age_max": 65, "publisher_platforms": ["facebook", "instagram"],
+                           "instagram_positions": ["story", "reels"], "facebook_positions": ["story", "facebook_reels"]}},
+   {"priority": 2, "video_label": {"name": "03-four-stages-4x5", "id": "L2"},
+    "customization_spec": {"age_min": 13, "age_max": 65, "publisher_platforms": ["facebook", "instagram"],
+                           "instagram_positions": ["stream", "explore"], "facebook_positions": ["feed"]}}],
+  "additional_data": {"multi_share_end_card": false}}}
